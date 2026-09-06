@@ -1,0 +1,11 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import '@fontsource/dm-sans/latin-400.css';
+import '@fontsource/dm-sans/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import App from './page';
+import './globals.css';
+const Studio = React.lazy(() => import('./WatchScene'));
+const studioMode = import.meta.env.DEV ? new URLSearchParams(location.search).get('studio') : null;
+createRoot(document.getElementById('root')!).render(<React.StrictMode>{studioMode ? <div style={{height:'100vh',position:'relative',background:studioMode==='art'?'#252b28':'#f4f2ed'}}><React.Suspense><Studio mode={studioMode==='art'?'art':'strap'} reduced /></React.Suspense></div> : <App />}</React.StrictMode>);
